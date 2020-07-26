@@ -1,6 +1,6 @@
 from requests import Session, get, post
 from bs4 import BeautifulSoup
-from time import strptime, strftime, localtime, sleep
+from time import sleep
 from datetime import timedelta, datetime
 
 session = Session()
@@ -27,75 +27,6 @@ header = {
 }
 months = [0, 'january', 'february', 'march', 'april', 'may', 'june',
           'july', 'august', 'september', 'october', 'november', 'december']
-
-
-# def get_whether(date='27-july'):
-#     url = f'https://pogoda.mail.ru/prognoz/yaroslavl/{date}/'
-#     print('test1', url)
-#     respdata = session.get(url, headers=header, proxies='', allow_redirects=False)
-#
-#     html = respdata.content.decode('utf-8')
-#     soup = BeautifulSoup(html, 'lxml')
-#
-#     arr_whether = []
-#     for per in soup.select('.block_selected .cols__column__inner .day_period'):
-#         dic_whether = {'day_date': per.select_one('.day__date').text, 'temp': per.select_one('.day__temperature ').text,
-#                        'desc': per.select_one('.day__description').select_one('span').text, 'addit': []}
-#         print(per.select_one('.day__date').text)
-#         for addit in per.select('.day__additional'):
-#             dic_whether['addit'].append(addit.select_one('span')['title'].split(': ')[1])
-#         arr_whether.append(dic_whether)
-#     return arr_whether
-#
-#
-# def range_date():
-#     now = datetime.now()
-#     prev30 = now - timedelta(days=30)
-#     next30 = now + timedelta(days=13)
-#     return [prev30, next30]  # .strftime("%d.%m.%Y")
-#
-#
-# def valid_date(date):
-#     try:
-#         sel_date = datetime.strptime(date + '.' + str(datetime.now().timetuple()[0]), "%d.%m.%Y")
-#     except ValueError as e:
-#         return False
-#     rd = range_date()
-#     if rd[0] < sel_date < rd[1]:
-#         return sel_date.strftime("%d.%m.%Y")
-#     else:
-#         return False
-#
-#
-# def trans_date(date):
-#     if date.split('.')[0][0] == '0':
-#         transdate = date.split('.')[0][1] + '-' + months[int(date.split('.')[1])]
-#     else:
-#         transdate = date.split('.')[0] + '-' + months[int(date.split('.')[1])]
-#     return transdate
-#
-#
-# def text_whether(date):
-#     vd = valid_date(date)
-#     if vd:
-#         td = trans_date(vd)
-#         fulltext = f'<b>Сводка за {vd}:</b>\n' \
-#                    '<b>------------------------------------</b>\n'
-#         for gw in get_whether(td):
-#             text = f'<b>{gw["day_date"]}</b>\n' \
-#                    f'\t\t\t\t<i>Температура: </i> <b>{gw["temp"]}</b> | <b>{gw["desc"]}</b>\n' \
-#                    f'\t\t\t\t<i>Давление: </i> <b><i>{gw["addit"][0]}</i></b>\n' \
-#                    f'\t\t\t\t<i>Влажность: </i> <b><i>{gw["addit"][1]}</i></b>\n' \
-#                    f'\t\t\t\t<i>Ветер: </i> <b><i>{gw["addit"][2]}</i></b>\n' \
-#                    f'\t\t\t\t<i>Вероятность осадков: </i> <b><i>{gw["addit"][3]}</i></b>\n\n'
-#             fulltext += text
-#         return fulltext
-#     else:
-#         rd = range_date()
-#         fulltext = '<i>Введите дату в формате\n' \
-#                    '<b>ДД.ММ</b> Например: <b>30.07</b>\n' \
-#                    f'в диапазоне от <b>{rd[0].strftime("%d.%m.%Y")}</b> до <b>{rd[1].strftime("%d.%m.%Y")}</b></i>'
-#         return fulltext
 
 
 class BotHandler:
